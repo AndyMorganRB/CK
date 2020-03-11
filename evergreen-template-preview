@@ -1,0 +1,183 @@
+{% capture lastshred_1 %}Learn how to adjust your diet to achieve single-digit body fat. <a href="rippedbody.com/last-shred">Get your copy of my book and video package, <em>The Last Shred</em>.</a>{% endcapture %}
+{% capture lastshred_2 %}Let me show you the exact data and decisions I made to achieve my five most viewed client results: <a href="rippedbody.com/last-shred">Learn more</a>{% endcapture %}
+
+{% capture msp_1 %}The latest evidence-based recommendations, distilled and clearly explained by one of the industry’s leading experts: <a href="muscleandstrengthpyramids.com">Check out <em>The Muscle and Strength Pyramid books</em>.</a>{% endcapture %}
+{% capture msp_2 %}"I wish I had a resource like this during my initial foray into the fitness field!": <a href="muscleandstrengthpyramids.com">Get your copy of <em>The Muscle and Strength Pyramid</em> books.</a>{% endcapture %}
+
+{% capture coaching_1 %}"The coaching exceeded all my expectations." <a href="rippedbody.com/coaching">Learn more.</a>{% endcapture %}
+{% capture coaching_2 %}Are you are willing to push your comfort zone to make a lasting change? <a href="rippedbody.com/coaching">Find out about my 1-on-1 online coaching.</a>{% endcapture %}
+
+{% capture products_1 %}Take your physique to the next level. Whether it's learning how to create and tailor training plans, tweaking them to bust through plateaus, adjusting your diet for a bulking phase, or wanting to shred down for a competition, my <a href="rippedbody.com/books">books</a>  will show you how.{% endcapture %}
+
+{% capture rec_1 %}Did you know I have a podcast? <a href="https://rippedbody.com/podcast/">Check it out here</a>.{% endcapture %}
+{% capture rec_2 %}Looking for other great nutrition and training resources? <a href="https://rippedbody.com/resources/">Here's a list of recommendations</a>.{% endcapture %}
+
+{% capture reply_1 %}Is there anything you'd like me to write about? If so, please drop me a reply.{% endcapture %}
+{% capture reply_2 %}Would you mind sharing this newsletter with anyone who you think would benefit? Here's the link: <a href="https://rippedbody.com/newsletter/">https://rippedbody.com/newsletter/</a> – thanks!!!{% endcapture %}
+{% capture reply_3 %}RippedBody.com is a site built on reader feedback since 2011. Is there something I can improve? Please don't hesitate to let me know in a reply.{% endcapture %}
+{% capture reply_4 %}Have you had any wins lately because of anything I've sent you? If so, I'd love to hear about it! Please drop me a reply.{% endcapture %}
+
+{% if true %}
+  {% assign rand = "now" | date: "%s" | modulo: 10 | plus: 1 %}
+  {% assign one_or_two = "now" | date: "%L" | modulo: 2 | plus: 1 %}
+  {% assign segmentation = "none" %}
+{% endif %}
+
+{% capture newsletter_ps_raw %}
+{% case rand %}
+  {% when 1, 2, 3, 4 %}
+    {% if subscriber.next_offer == "lastshred" %}
+        {% case rand %}
+          {% when 1 %}
+            {% if true %}{% assign segmentation = "lastshred_1" %}{% endif %}
+            {{ lastshred_1 }}
+          {% when 2 %}
+            {% if true %}{% assign segmentation = "lastshred_2" %}{% endif %}
+            {{ lastshred_2 }}
+          {% when 3 %}
+            {% if true %}{% assign segmentation = "lastshred_1" %}{% endif %}
+            {{ lastshred_1 }}
+          {% when 4 %}
+            {% if true %}{% assign segmentation = "lastshred_2" %}{% endif %}
+            {{ lastshred_2 }}
+        {% endcase %}
+      {% elsif subscriber.next_offer == "msp" %}
+        {% case rand %}
+          {% when 1 %}
+            {% if true %}{% assign segmentation = "msp_1" %}{% endif %}
+            {{ msp_1 }}
+          {% when 2 %}
+            {% if true %}{% assign segmentation = "msp_2" %}{% endif %}
+            {{ msp_2 }}
+          {% when 3 %}
+            {% if true %}{% assign segmentation = "msp_1" %}{% endif %}
+            {{ msp_1 }}
+          {% when 4 %}
+            {% if true %}{% assign segmentation = "msp_1" %}{% endif %}
+            {{ msp_1 }}
+        {% endcase %}
+      {% elsif subscriber.next_offer == "coaching" %}
+        {% case rand %}
+          {% when 1 %}
+            {% if true %}{% assign segmentation = "coaching_1" %}{% endif %}
+            {{ coaching_1 }}
+          {% when 2 %}
+            {% if true %}{% assign segmentation = "coaching_2" %}{% endif %}
+            {{ coaching_2 }}
+          {% when 3 %}
+            {% if true %}{% assign segmentation = "coaching_1" %}{% endif %}
+            {{ coaching_1 }}
+          {% when 4 %}
+            {% if true %}{% assign segmentation = "coaching_1" %}{% endif %}
+            {{ coaching_2 }}
+        {% endcase %}
+      {% else %}
+        {% if true %}{% assign segmentation = "products_1" %}{% endif %}
+            {{ products_1 }}
+     {% endif %}
+  {% when 5 %}
+    {% case one_or_two %}
+      {% when 1 %}
+        {% if true %}{% assign segmentation = "rec_1" %}{% endif %}
+        {{ rec_1 }}
+      {% when 2 %}
+        {% if true %}{% assign segmentation = "rec_2" %}{% endif %}
+        {{ rec_2 }}
+    {% endcase %}
+  {% when 6, 7 %}
+    {% case rand %}
+      {% when 6 %}
+        {% case one_or_two %}
+          {% when 1 %}
+            {% if true %}{% assign segmentation = "reply_1" %}{% endif %}
+            {{ reply_1 }}
+          {% when 2 %}
+            {% if true %}{% assign segmentation = "reply_2" %}{% endif %}
+            {{ reply_2 }}
+        {% endcase %}
+      {% when 7 %}
+        {% case one_or_two %}
+          {% when 1 %}
+            {% if true %}{% assign segmentation = "reply_3" %}{% endif %}
+            {{ reply_3 }}
+          {% when 2 %}
+            {% if true %}{% assign segmentation = "reply_4" %}{% endif %}
+            {{ reply_4 }}
+        {% endcase %}
+    {% endcase %}
+  {% when 8, 9, 10 %}
+    {% if true %}{% assign segmentation = "noop" %}{% endif %}
+{% endcase %}
+{% endcapture %}
+{% capture newsletter_ps %}{{ newsletter_ps_raw | strip }}{% endcapture %}
+
+<style>
+  [data-slate-editor] { padding: 30px; } 
+  .message-content { 
+    max-width: 580px;
+    margin: 2rem auto 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.5;
+    color: #1A202C; }
+  .message-content div { padding-bottom: 10px; }
+  .message-content img { max-width: 100%; height: auto; }
+  .logo {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  p {
+    margin-bottom: 1em;
+  }
+  li {
+    margin-bottom: 0.5em;
+  }
+  a, li a {
+    text-decoration: underline;
+    color: #2B6CB0;
+  }
+  u {
+    text-decoration: none;
+    background: #ffa;
+    padding: 0 1px;
+  }
+  a:hover, li a:hover {
+    color: #4299E1;
+  }
+  .faq { padding: 1.25rem 0.75rem; background: #F7FAFC; color: #718096; font-size: 0.85rem; }
+  .faq strong { color: #4A5568; }
+  .faq .item { margin-bottom: 0.5rem; }
+</style>
+
+<div style="display:none;font-size:1px;color:#333333;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">{{ preview_text }}</div>
+
+
+
+<div class='message-content'>
+  <div class='logo'>
+    <img src="https://rippedbody.com/wp-content/uploads/2017/03/Rippedbody.com-Footer-Logo-bw-1.png" width="171" alt="RippedBody.com" />
+  </div>
+{{ message_content }}
+
+- Andy<br>
+<a href="https://rippedbody.com/">RippedBody.com</a>
+{% if skip_ps %}{% else %}{% if newsletter_ps != blank or override_ps != blank %}<br><br>P.S. {% if override_ps %}{{ override_ps }}{% else %}{{ newsletter_ps }}{% endif %}{% endif %}{% endif %}
+
+<br><br><br>
+<div class='faq'>
+
+<div class='item'><strong>"Why am I getting this email?"</strong><br>You either opted in to my email list (at RippedBody.com) or bought one of my books.</div>
+
+<div class='item'><strong>"I'm struggling with something diet or training related. Can I get your help?"</strong><br>If you're open to me answering in my "Reader Q" emails – then tap reply and share with me what's troubling you. If you can't wait for that, grab me in the comments on any related article on the site. I answer daily.</div>
+
+<div class='item'><strong>"Can you help me 1-on-1?"</strong><br>I do take on a select few online coaching clients, but there may be a wait before a space becomes available and the level of detail is definitely not for everyone. Full details here: <a href="https://rippedbody.com/coaching">https://rippedbody.com/coaching</a></div>
+
+<div class='item'><strong>"I'm looking to read something more structured than just articles. Have anything for me?"</strong><br>Sure! <a href="https://rippedbody.com/books/">Check out my books</a>.</div>
+
+<div class='item'><strong>"I'd like to share this newsletter with someone."</strong><br>Please do! Here's where you can send them: <a href="https://rippedbody.com/newsletter/">https://rippedbody.com/newsletter/</a></div>
+
+<div><strong>"I'd like to stop getting these emails."</strong><br>No problem. You can either <a href="https://rippedbody.com/unsubscribe/" trigger-id="1254245">unsubscribe from getting my newsletter</a> (and keep getting product updates / etc) or you can <a href="{{ unsubscribe_url }}">unsubscribe from everything.</a></div>
+<br>
+{{ address }}
+</div>
+</div>
